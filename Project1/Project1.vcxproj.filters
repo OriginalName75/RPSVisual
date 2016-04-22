@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Combat">
+      <UniqueIdentifier>{30966aac-77d0-4aeb-ae6a-824f48af0609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Combat\Actions">
+      <UniqueIdentifier>{1bd14c9e-0cdf-4a48-9a9f-1d331a510cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Other">
+      <UniqueIdentifier>{c7878e8c-5b1a-4b16-bdff-fe27af7293fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Combat\Player">
+      <UniqueIdentifier>{0878aad5-bca2-4ef6-85b2-0d07d474b721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Combat\Player\heros">
+      <UniqueIdentifier>{f4d6c71e-0fbe-424d-9238-75a767da9b45}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Id.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Combat\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ImagePerso.cpp">
+      <Filter>Source Files\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionFrame.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="FutureAction.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="Heros.cpp">
+      <Filter>Source Files\Combat\Player\heros</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin.cpp">
+      <Filter>Source Files\Combat\Player\heros</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>Source Files\Combat\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeAttack.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActData.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayData.cpp">
+      <Filter>Source Files\Combat\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinLoaded.cpp">
+      <Filter>Source Files\Combat\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Cancel.cpp">
+      <Filter>Source Files\Combat\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeJeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Action.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Id.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FutureAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImagePerso.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Heros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinLoaded.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeAttack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cancel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeJeu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
