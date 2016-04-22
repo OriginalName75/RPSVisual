@@ -7,6 +7,7 @@
 Block::Block(int timeInit, int timeAfter, int value, sf::Keyboard::Key player1, sf::Keyboard::Key player2, std::vector<ActionFrame> actionFrames, std::vector<int> lostHitstun) : Action(timeInit, timeAfter, value, player1, player2, actionFrames, lostHitstun)
 {
 
+
 }
 
 Block::Block()
