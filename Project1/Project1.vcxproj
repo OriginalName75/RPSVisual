@@ -135,6 +135,7 @@
     <ClCompile Include="ImagePerso.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModeJeu.cpp" />
+    <ClCompile Include="Musics.cpp" />
     <ClCompile Include="PlayData.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Skin.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Id.h" />
     <ClInclude Include="ImagePerso.h" />
     <ClInclude Include="ModeJeu.h" />
+    <ClInclude Include="Musics.h" />
     <ClInclude Include="PlayData.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skin.h" />

@@ -4,9 +4,10 @@
 class SoundCust: public sf::SoundBuffer
 {
 public:
-	int tempo;
-	SoundCust(std::string str, int tempo);
+	float tempo;
+	std::string str;
+	SoundCust(std::string str, float tempo);
 	SoundCust();
+	void load();
 	~SoundCust();
 };
-

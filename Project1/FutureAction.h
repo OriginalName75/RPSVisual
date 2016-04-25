@@ -15,7 +15,7 @@ public:
 	Player* p1;
 	Player* p2;
 	ModeJeu mode;
-	FutureAction(Player* p1, Player* p2, std::string zik, float speedFrame, ModeJeu mode);
+	FutureAction(Player* p1, Player* p2, const SoundCust* zik, ModeJeu mode);
 	FutureAction();	
 	~FutureAction();
 	int len;
@@ -26,7 +26,7 @@ public:
 	void update();
 	void startZik();
 private:
-	SoundCust buffer;
+	SoundCust* zik;
 	sf::Sound sound;
 	bool blocked;
 	int j;

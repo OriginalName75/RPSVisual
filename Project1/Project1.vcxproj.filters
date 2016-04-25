@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Combat\Player\heros">
       <UniqueIdentifier>{f4d6c71e-0fbe-424d-9238-75a767da9b45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\zik">
+      <UniqueIdentifier>{324e6f23-3102-4cd2-8a96-3faafdf00cbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -85,7 +88,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SoundCust.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\zik</Filter>
+    </ClCompile>
+    <ClCompile Include="Musics.cpp">
+      <Filter>Source Files\zik</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +147,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SoundCust.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Musics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

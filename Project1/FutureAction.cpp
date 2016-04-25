@@ -4,16 +4,20 @@
 
 using namespace sf;
 using namespace std;
-FutureAction::FutureAction(Player * p1, Player * p2, std::string zik, float speedFrame, ModeJeu mode):FutureAction()
+FutureAction::FutureAction(Player * p1, Player * p2, const SoundCust* zik, ModeJeu mode):FutureAction()
 {
 	
 	this->p1 = p1;
 	this->p2 = p2;
 	this->mode = mode;
-	this->speedFrame = speedFrame;
+	this->zik = new SoundCust(*zik);
+	
+	this->speedFrame = this->zik->tempo;
+
 	sound = Sound();
-	buffer = SoundCust(zik, speedFrame);
-	sound.setBuffer(buffer);
+	sound.setLoop(true);
+	this->zik->load();
+	sound.setBuffer(*this->zik);
 	
 }
 FutureAction::FutureAction()
