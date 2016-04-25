@@ -1,12 +1,10 @@
 #include <cstdlib>
 #include <SFML/Graphics.hpp> 
 #include <iostream>
-#include "Action.h"
 #include "Human.h"
-#include "FutureAction.h"
-#include "ActData.h"
+#include "IA.h"
 #include "playData.h"
-#include "ActData.h"
+#include "Combat.h"
 #include "Musics.h"
 using namespace sf;
 using namespace std;
@@ -14,7 +12,7 @@ using namespace std;
 
 int main()
 {
-	Clock clock;
+	
 	bool pause;
 	pause = true;
 	bool clicked = false;
@@ -27,11 +25,13 @@ int main()
 	app.setFramerateLimit(60);
 	app.setVerticalSyncEnabled(true);
 
-	Player p1 = Human(heros::warrior, true);
-	Player p2 = Human(heros::traveller, false);
-	FutureAction t = FutureAction(&p1, &p2, musics::defa,1);
+	Player* p1 = new Human(heros::warrior, true);
+	Player* p2 = new IA(heros::traveller, false);
+	FutureAction t = FutureAction(p1, p2, musics::defa,1);
+	
+	Combat c = Combat(p1,p2, &t, &app);
 	t.startZik();
-
+	
 	while (app.isOpen())
 	{
 		Event event;
@@ -44,13 +44,7 @@ int main()
 
 		app.clear();
 	
-		for each (const Action* action in actions::listAction) {
-			action->update(&t);
-		}
-		t.update();
-		t.print(&app);
-		p1.print(&app);
-		p2.print(&app);
+		c.update();
 		
 		app.display();
 	}

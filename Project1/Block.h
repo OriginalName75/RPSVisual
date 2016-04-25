@@ -8,8 +8,9 @@ public:
 	Block();
 	~Block();
 	virtual void act(FutureAction* t, Player* cible, int cibleInt, bool block) const;
-private:
 	int updateOK(FutureAction* t, int player, TypeAttack  att) const;
+private:
+	
 	bool isInVect(ActionFrame a) const;
 	void plus(FutureAction* t, int player) const;
 };	

@@ -31,6 +31,7 @@ FutureAction::FutureAction()
 	tree = ImagePerso("img/decompte/3.png", 400 - 23, 0);
 	go = ImagePerso("img/decompte/go.png", 400 - 23, 0);
 	rytm = ImagePerso("img/decompte/rytm.png",x+5 , 30);
+	secBefore = 0;
 	
 	for (int i = 0; i < len; i++)
 	{
@@ -45,8 +46,8 @@ FutureAction::FutureAction()
 		s2->setPosition(28* (len - i) + x, 28 + y);
 		player2Sprites.push_front(*s2);
 	}
-	
-	
+	loclist = new std::list<ActionFrame>();
+	loclistMe = new std::list<ActionFrame>();
 }
 
 
@@ -65,7 +66,7 @@ void FutureAction::print(sf::RenderWindow * app)
 		app->draw(s);
 	}
 	printDec(app);
-	if (clock.getElapsedTime().asSeconds() < speedFrame / 6) {
+	if (sound.getPlayingOffset().asSeconds() - secBefore < speedFrame / 6) {
 		app->draw(rytm);
 	}
 }
@@ -80,9 +81,12 @@ void FutureAction::maj()
 
 void FutureAction::update()
 {
-	if (clock.getElapsedTime().asSeconds() >= speedFrame) {
+	if (secBefore>sound.getPlayingOffset().asSeconds()) {
+		secBefore = -1* speedFrame;
+	}
+	if (sound.getPlayingOffset().asSeconds() - secBefore >= speedFrame) {
 
-		clock.restart();
+		//clock.restart();
 		if (dec <2) {
 			if (dec==1) {
 				dec--;
@@ -124,18 +128,23 @@ void FutureAction::update()
 					changed = true;
 				}
 			}
-
-
+			if (!p1->isH()) {
+				changed= iaPLay(1) || changed;
+			}
+			if (!p2->isH()) {
+				changed = iaPLay(2) || changed;
+			}
 			if (changed) {
 				std::cout << "" << std::endl;
 
 				maj();
 				verifyActions();
+				
 			}
-			else {
-				p1->majLife();
-				p2->majLife();
-			}
+			
+				
+			p1->majLife();
+			p2->majLife();
 
 			auxupdate(player1, p1);
 			auxupdate(player2, p2);
@@ -143,13 +152,15 @@ void FutureAction::update()
 		else {
 			dec--;
 		}
+		secBefore = sound.getPlayingOffset().asSeconds();
 	}
+	
 }
 
 void FutureAction::startZik()
 {
 	sound.play();
-	clock.restart();
+	
 
 }
 
@@ -211,6 +222,7 @@ void FutureAction::majAux(std::list<ActionFrame>* player, std::list<sf::Sprite>*
 
 void FutureAction::verifyActions()
 {
+	
 	bool acted = false;
 	if (dec<2) {
 		auxverifyActions(player1, player2, p1, p2, 1, 2, &acted);
@@ -226,7 +238,7 @@ void FutureAction::auxverifyActions(std::list<ActionFrame> player1, std::list<Ac
 	if (!player1.empty()) {
 
 		std::list<ActionFrame>::iterator act = player1.begin();
-		if (!(*act == actionFrames::idle) && !(*act == actionFrames::preparing)) {
+		if (!(*act == actionFrames::idle) && !(*act == actionFrames::preparing) && !(*act == actionFrames::endlag)) {
 
 			bool found = false;
 			for each (const Action* acti in actions::listAction)
@@ -253,7 +265,7 @@ void FutureAction::auxverifyActions(std::list<ActionFrame> player1, std::list<Ac
 						else {
 
 							std::list<ActionFrame>::iterator actio = player2.begin();
-							if (*actio == actionFrames::idle || *actio == actionFrames::stun || *actio == actionFrames::preparing) {
+							if (*actio == actionFrames::idle || *actio == actionFrames::stun || *actio == actionFrames::preparing || *actio == actionFrames::endlag) {
 								*acted = true;
 								acti->act(this, p2, cibleIn2, false);
 							}
@@ -346,6 +358,119 @@ void FutureAction::printDec(sf::RenderWindow * app)
 			app->draw(go);
 		}
 	}
+}
+
+bool FutureAction::iaPLay(int intP)
+{
+	
+	
+	if (intP==1) {
+		p1->blockPress = false;
+		*loclistMe = player1;
+		
+		*loclist = player2;
+
+	}
+	else {
+		p2->blockPress = false;
+		*loclistMe = player2;
+		
+		*loclist = player1;
+	}
+	bool notcancel = false;
+	if (!loclistMe->empty() && !(loclistMe->front() == actionFrames::idle)) {
+		if ((intP == 1 && p1->blockCD == 0) || (intP == 2 && p2->blockCD == 0)) {
+			if (!loclist->empty()) {
+				it = loclist->begin();
+				if ((*it == actionFrames::preparing)) {
+					it++;
+					if (!(*it == actionFrames::preparing)) {
+						for each (const TypeAttack* acts in loclistMe->front().typeAtt.beats)
+						{
+							if (acts->id == it->typeAtt.id) {
+								notcancel = true;
+								break;
+							}
+							
+						}
+						if (!notcancel) {
+							
+							actions::cancel->keyOnly(this, intP);
+						}
+						
+
+					}
+				}
+			}
+
+		}
+	}
+	if (intP == 1) {
+		p1->blockPress = false;
+		*loclistMe = player1;
+
+		*loclist = player2;
+
+	}
+	else {
+		p2->blockPress = false;
+		*loclistMe = player2;
+
+		*loclist = player1;
+	}
+	if (!loclistMe->empty() && !(loclistMe->front() == actionFrames::idle)) {
+		if (!notcancel) {
+			for each (ActionFrame a in actionFrames::listProtect)
+			{
+				if (a == loclistMe->back()) {
+					cout << "lol" << endl;
+					actions::block->updateOK(this, intP, a.typeAtt);
+
+
+
+					return true;
+				}
+			}
+		}
+		
+
+		return false;
+	}
+	if (loclist->empty() || loclist->front()==actionFrames::idle) {
+		
+		return false;
+	}
+	else if (loclist->front() == actionFrames::preparing) {
+	
+
+		it = loclist->begin();
+	
+	
+		it++;
+		if (!(*it == actionFrames::preparing)) {
+			brea = false;
+			for each (TypeAttack t in typeAttack::listtypeAttack)
+			{
+				for each (const TypeAttack* b in t.beats)
+				{
+					if (b->id == it->typeAtt.id) {
+
+					
+						actions::block->updateOK(this, intP, t);
+
+						
+						
+						return true;
+					}
+				}
+				
+			}
+			
+		}
+		
+		
+	}
+	return false;
 }
 
 

@@ -22,11 +22,12 @@ public:
 	void update(FutureAction* t) const;
 	virtual void act(FutureAction* t, Player* cible, int cibleInt, bool block) const;
 	~Action();
-	
+	virtual int updateOK(FutureAction* t, int player, TypeAttack att) const;
+	virtual void keyOnly(FutureAction* t, int player) const;
 private:
 	int updateAux(FutureAction* t, TypeAttack ta) const;
-	virtual int updateOK(FutureAction* t, int player, TypeAttack att) const;
+	
 	virtual void plus(FutureAction* t, int player) const;
-	virtual void keyOnly(FutureAction* t, int player) const;
+	
 };
 

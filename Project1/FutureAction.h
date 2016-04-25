@@ -24,6 +24,7 @@ public:
 	std::list<ActionFrame> player2;
 	void maj();
 	void update();
+	bool iaPLay(int intP);
 	void startZik();
 private:
 	SoundCust* zik;
@@ -44,5 +45,13 @@ private:
 	ImagePerso go;
 	ImagePerso rytm;
 	void printDec(sf::RenderWindow * app);
+	float secBefore;
+	
+	bool brea;
+	
+	std::list<ActionFrame>::iterator it;
+	
+	std::list<ActionFrame>* loclist;
+	std::list<ActionFrame>* loclistMe;
 };
 

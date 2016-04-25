@@ -105,10 +105,11 @@ int Block::updateOK(FutureAction * t, int player, TypeAttack att) const
 
 			}
 		}
-		list->push_back(actionFrames::preparing);
+		list->push_back(actionFrames::endlag);
 		return true;
 		
 	}
+
 	return false;
 	
 }

@@ -14,8 +14,9 @@ public:
 	~Attack();
 	Attack();
 	void act(FutureAction* t, Player* cible, int cibleInt, bool block) const;
-private:
 	int updateOK(FutureAction* t, int player, TypeAttack att) const;
+private:
+	
 
 };
 

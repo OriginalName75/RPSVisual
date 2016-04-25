@@ -13,6 +13,7 @@ public:
 	int isComboted;
 	bool beingCombo;
 	int hp;
+	virtual bool isH();
 	Player(const Heros hero, int isLeft);
 	Player();
 	~Player();
@@ -20,6 +21,7 @@ public:
 	void maj(ActionFrame act);
 	void majLife();
 	void majTurn();
+	
 private:
 	sf::RectangleShape life;
 	sf::RectangleShape mana;

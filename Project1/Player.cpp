@@ -2,6 +2,11 @@
 
 
 
+bool Player::isH()
+{
+	return false;
+}
+
 Player::Player(const Heros hero, int isLeft)
 {
 	error = false;
@@ -70,4 +75,6 @@ void Player::majTurn()
 	}
 	
 }
+
+
 

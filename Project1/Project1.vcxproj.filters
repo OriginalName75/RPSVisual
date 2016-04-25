@@ -84,14 +84,20 @@
     <ClCompile Include="Cancel.cpp">
       <Filter>Source Files\Combat\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="ModeJeu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SoundCust.cpp">
       <Filter>Source Files\zik</Filter>
     </ClCompile>
     <ClCompile Include="Musics.cpp">
       <Filter>Source Files\zik</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeJeu.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="IA.cpp">
+      <Filter>Source Files\Combat\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +156,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Musics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Combat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

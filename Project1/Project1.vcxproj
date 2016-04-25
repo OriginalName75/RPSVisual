@@ -128,9 +128,11 @@
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Cancel.cpp" />
+    <ClCompile Include="Combat.cpp" />
     <ClCompile Include="FutureAction.cpp" />
     <ClCompile Include="Heros.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="IA.cpp" />
     <ClCompile Include="Id.cpp" />
     <ClCompile Include="ImagePerso.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -150,9 +152,11 @@
     <ClInclude Include="Attack.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Cancel.h" />
+    <ClInclude Include="Combat.h" />
     <ClInclude Include="FutureAction.h" />
     <ClInclude Include="Heros.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="IA.h" />
     <ClInclude Include="Id.h" />
     <ClInclude Include="ImagePerso.h" />
     <ClInclude Include="ModeJeu.h" />

@@ -31,6 +31,7 @@ void Action::update(FutureAction * t) const
 		{
 
 			if (updateAux(t, ty)) {
+				
 				break;
 			}
 		}
@@ -45,47 +46,55 @@ void Action::act(FutureAction * t, Player* cible, int cibleInt, bool block) cons
 
 int Action::updateAux(FutureAction * t, TypeAttack ta) const
 {
-	if (sf::Keyboard::isKeyPressed(player1))
-	{
-		keyOnly(t, 1);
-	}
-	else {
-		plus(t, 1);
-	}
-	if (sf::Keyboard::isKeyPressed(player2))
-	{
-		keyOnly(t, 2);
-	}
-	else {
-		plus(t, 2);
-	}
-	
-	
-	if (sf::Keyboard::isKeyPressed(player1) && sf::Keyboard::isKeyPressed(ta.player1))
-	{
-		
-		
-		if (updateOK(t, 1, ta)) {
-			
-			t->maj();
+	if (t->p1->isH()) {
+		if (sf::Keyboard::isKeyPressed(player1))
+		{
+			keyOnly(t, 1);
 		}
-		return true;
+		else {
+			plus(t, 1);
+		}
 	}
-	else {
-		
+	if (t->p2->isH()) {
+		if (sf::Keyboard::isKeyPressed(player2))
+		{
+			keyOnly(t, 2);
+		}
+		else {
+			plus(t, 2);
+		}
+	}
+	bool resp = false;;
+	if (t->p1->isH()) {
+		if (sf::Keyboard::isKeyPressed(player1) && sf::Keyboard::isKeyPressed(ta.player1))
+		{
+
+
+			if (resp = updateOK(t, 1, ta)) {
+
+				
+				resp = true;
+			}
+			
+		}
+	}
+	if (t->p2->isH()) {
+
 		if (sf::Keyboard::isKeyPressed(player2) && sf::Keyboard::isKeyPressed(ta.player2))
 		{
 			if (updateOK(t, 2, ta)) {
-				t->maj();
+				
+				resp = true;
 			}
-			return true;
-		}
-		else {
 			
-			return false;
 		}
-	}
+		
 
+	}
+	if (resp) {
+		t->maj();
+	}
+	return resp;
 }
 
 int Action::updateOK(FutureAction * t, int player, TypeAttack att) const

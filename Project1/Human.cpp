@@ -15,3 +15,9 @@ Human::~Human()
 {
 }
 
+bool Human::isH()
+{
+	
+	return true;
+}
+
