@@ -8,6 +8,7 @@ public:
 
 	void chargeImg(std::string linkImg);
 	ImagePerso(std::string linkImg);
+	ImagePerso(std::string linkImg, int x, int y);
 	ImagePerso();
 	~ImagePerso();
 };

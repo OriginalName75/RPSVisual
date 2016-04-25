@@ -26,14 +26,16 @@ Action::Action()
 void Action::update(FutureAction * t) const
 {
 	
-	int finish=true;
-	for each (TypeAttack ty in typeAttack::listtypeAttack)
-	{
-		
-		if (updateAux(t,ty)) {
-			break;
+	if (t->dec<2) {
+		for each (TypeAttack ty in typeAttack::listtypeAttack)
+		{
+
+			if (updateAux(t, ty)) {
+				break;
+			}
 		}
 	}
+	
 }
 
 void Action::act(FutureAction * t, Player* cible, int cibleInt, bool block) const

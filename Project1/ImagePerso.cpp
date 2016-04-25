@@ -8,6 +8,11 @@ ImagePerso::ImagePerso(std::string linkImg)
 	chargeImg(linkImg);
 }
 
+ImagePerso::ImagePerso(std::string linkImg, int x, int y):ImagePerso(linkImg)
+{
+	setPosition(x,y);
+}
+
 ImagePerso::ImagePerso()
 {
 }
@@ -38,4 +43,4 @@ void ImagePerso::chargeImg(std::string linkImg)
 		setTexture(*tx);
 
 	}
-}
+};

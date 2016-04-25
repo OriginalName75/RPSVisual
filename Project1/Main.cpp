@@ -28,8 +28,9 @@ int main()
 
 	Player p1 = Human(heros::warrior, true);
 	Player p2 = Human(heros::traveller, false);
-	FutureAction t = FutureAction(&p1, &p2,0.5,1);
-	
+	FutureAction t = FutureAction(&p1, &p2, "zik/test.ogg", 0.46875,1);
+	t.startZik();
+
 	while (app.isOpen())
 	{
 		Event event;

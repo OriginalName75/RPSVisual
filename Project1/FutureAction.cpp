@@ -4,23 +4,34 @@
 
 using namespace sf;
 using namespace std;
-FutureAction::FutureAction(Player * p1, Player * p2, float speedFrame, ModeJeu mode):FutureAction()
+FutureAction::FutureAction(Player * p1, Player * p2, std::string zik, float speedFrame, ModeJeu mode):FutureAction()
 {
+	
 	this->p1 = p1;
 	this->p2 = p2;
 	this->mode = mode;
 	this->speedFrame = speedFrame;
-
+	sound = Sound();
+	buffer = SoundCust(zik, speedFrame);
+	sound.setBuffer(buffer);
+	
 }
 FutureAction::FutureAction()
 {
-	
+	dec = 4;
+	float x = 50;
+	float y = 80;
 	len = 25;
+	one = ImagePerso("img/decompte/1.png", 400 - 23, 0);
+	two = ImagePerso("img/decompte/2.png", 400 - 23, 0);
+	tree = ImagePerso("img/decompte/3.png", 400 - 23, 0);
+	go = ImagePerso("img/decompte/go.png", 400 - 23, 0);
+	rytm = ImagePerso("img/decompte/rytm.png",x+5 , 30);
+	
 	for (int i = 0; i < len; i++)
 	{
 		 
-		float x = 50;
-		float y = 80;
+		
 		Sprite* s = new Sprite();
 		s->setTexture(*actionFrames::idle.img);
 		s->setPosition(28*(len - i) + x, y);
@@ -49,6 +60,10 @@ void FutureAction::print(sf::RenderWindow * app)
 	{
 		app->draw(s);
 	}
+	printDec(app);
+	if (clock.getElapsedTime().asSeconds() < speedFrame / 6) {
+		app->draw(rytm);
+	}
 }
 
 void FutureAction::maj()
@@ -61,63 +76,77 @@ void FutureAction::maj()
 
 void FutureAction::update()
 {
-	if (clock.getElapsedTime().asSeconds()>= speedFrame) {
-		
+	if (clock.getElapsedTime().asSeconds() >= speedFrame) {
+
 		clock.restart();
-		
-		changed = false;
-		blocked = false;
-		p1->majTurn();
-		p2->majTurn();
-		
-		if (!player1.empty()) {
-			
-			std::list<ActionFrame>::iterator list_iter = player1.begin();
-			for each (ActionFrame actF in actionFrames::listProtect)
-			{
-				if (*list_iter == actF) {
-					blocked = true;
+		if (dec <2) {
+			if (dec==1) {
+				dec--;
+			}
+			changed = false;
+			blocked = false;
+			p1->majTurn();
+			p2->majTurn();
+
+			if (!player1.empty()) {
+
+				std::list<ActionFrame>::iterator list_iter = player1.begin();
+				for each (ActionFrame actF in actionFrames::listProtect)
+				{
+					if (*list_iter == actF) {
+						blocked = true;
+					}
+				}
+				if (!blocked || player1.size() < len - 1) {
+					player1.pop_front();
+					changed = true;
+				}
+
+			}
+			blocked = false;
+			if (!player2.empty()) {
+
+				std::list<ActionFrame>::iterator list_iter = player2.begin();
+				for each (ActionFrame actF in actionFrames::listProtect)
+				{
+					if (*list_iter == actF) {
+						blocked = true;
+					}
+				}
+
+				if (!blocked || player2.size() < len - 1) {
+
+					player2.pop_front();
+					changed = true;
 				}
 			}
-			if (!blocked || player1.size()<len - 1) {
-				player1.pop_front();
-				changed = true;
+
+
+			if (changed) {
+				std::cout << "" << std::endl;
+
+				maj();
+				verifyActions();
 			}
-			
-		}
-		blocked = false;
-		if (!player2.empty()) {
-		
-			std::list<ActionFrame>::iterator list_iter = player2.begin();
-			for each (ActionFrame actF in actionFrames::listProtect)
-			{
-				if (*list_iter == actF) {
-					blocked = true;
-				}
+			else {
+				p1->majLife();
+				p2->majLife();
 			}
-			
-			if (!blocked || player2.size()<len-1) {
-				
-				player2.pop_front();
-				changed = true;
-			}
-		}
-		
-		
-		if (changed) {
-			std::cout << "" << std::endl;
-			
-			maj();
-			verifyActions();
+
+			auxupdate(player1, p1);
+			auxupdate(player2, p2);
 		}
 		else {
-			p1->majLife();
-			p2->majLife();
+			dec--;
 		}
-		
-		auxupdate(player1, p1);
-		auxupdate(player2, p2);
 	}
+}
+
+void FutureAction::startZik()
+{
+	sound.play();
+	clock.restart();
+
 }
 
 void FutureAction::auxupdate(std::list<ActionFrame> player1, Player* p1)
@@ -179,9 +208,11 @@ void FutureAction::majAux(std::list<ActionFrame>* player, std::list<sf::Sprite>*
 void FutureAction::verifyActions()
 {
 	bool acted = false;
+	if (dec<2) {
+		auxverifyActions(player1, player2, p1, p2, 1, 2, &acted);
+		auxverifyActions(player2, player1, p2, p1, 2, 1, &acted);
+	}
 	
-	auxverifyActions(player1, player2, p1, p2, 1, 2, &acted);
-	auxverifyActions(player2, player1, p2, p1, 2, 1, &acted);
 }
 
 void FutureAction::auxverifyActions(std::list<ActionFrame> player1, std::list<ActionFrame> player2, Player* p1, Player* p2, int cibleIn1, int cibleIn2, bool* acted)
@@ -291,6 +322,24 @@ void FutureAction::auxverifyActions(std::list<ActionFrame> player1, std::list<Ac
 				}
 			}
 
+		}
+	}
+}
+
+void FutureAction::printDec(sf::RenderWindow * app)
+{
+	if (dec>0) {
+		if (dec==4) {
+			app->draw(tree);
+		}
+		else if (dec == 3) {
+			app->draw(two);
+		}
+		else if (dec == 2) {
+			app->draw(one);
+		}
+		else {
+			app->draw(go);
 		}
 	}
 }

@@ -3,15 +3,19 @@
 #include "Player.h"
 #include "ActionFrame.h"
 #include "ModeJeu.h"
+#include "ImagePerso.h"
+#include "SoundCust.h"
+
 class FutureAction
 {
 public:
 	
 	float speedFrame;
+	int dec;
 	Player* p1;
 	Player* p2;
 	ModeJeu mode;
-	FutureAction(Player* p1, Player* p2, float speedFrame, ModeJeu mode);
+	FutureAction(Player* p1, Player* p2, std::string zik, float speedFrame, ModeJeu mode);
 	FutureAction();	
 	~FutureAction();
 	int len;
@@ -20,8 +24,10 @@ public:
 	std::list<ActionFrame> player2;
 	void maj();
 	void update();
-
+	void startZik();
 private:
+	SoundCust buffer;
+	sf::Sound sound;
 	bool blocked;
 	int j;
 	sf::Clock clock;
@@ -32,5 +38,11 @@ private:
 	bool changed;
 	void verifyActions();
 	void auxverifyActions(std::list<ActionFrame> player1, std::list<ActionFrame> player2, Player* p1, Player* p2, int cibleIn1, int cibleIn2, bool* acted);
+	ImagePerso one;
+	ImagePerso two;
+	ImagePerso tree;
+	ImagePerso go;
+	ImagePerso rytm;
+	void printDec(sf::RenderWindow * app);
 };
 
